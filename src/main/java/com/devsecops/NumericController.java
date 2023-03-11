@@ -30,7 +30,7 @@ public class NumericController {
 		// 	return "Kubernetes DevSecOps";
 		// }
 		public ResponseEntity<String> welcome() throws IOException {
-			String htmlContent = new String(Files.readAllBytes(Paths.get("index.jsp")));
+			String htmlContent = new String(Files.readAllBytes(Paths.get("./index.html")));
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.TEXT_HTML);
 			return new ResponseEntity<>(htmlContent, headers, HttpStatus.OK);
