@@ -50,7 +50,7 @@ public class NumericController {
         //     Path path = Paths.get("./index.html");
         //     byte[] data = Files.readAllBytes(path);
         //     String html = new String(data);
-        //     return new ResponseEntity<>(html, headers, HttpStatus.OK);
+        //     ;
         // }
 
 		public ResponseEntity<String> welcome() {
@@ -66,7 +66,7 @@ public class NumericController {
 				return ResponseEntity.ok().body(builder.toString());
 			} catch (IOException e) {
 				logger.error("Failed to read index.html file.", e);
-				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to read index.html file.");
+				return new ResponseEntity<>(html, headers, HttpStatus.OK);
 			}
 		}
 
