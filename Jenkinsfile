@@ -37,10 +37,8 @@ pipeline {
           withSonarQubeEnv('SonarQube') {  // lấy từ jenkins/manager/sonarqube
             sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com:9000"
           }
-          timeout(time: 2, unit: "MINUTES") {
-            script {
+          timeout(time: 2, unit: "HOURS") {
               waitForQualityGate abortPipeline: true
-            }
           }
         }
       }
