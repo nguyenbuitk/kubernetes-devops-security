@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -eo pipefail
 
 JENKINS_URL='http://localhost:8080'
@@ -21,11 +20,11 @@ done < plugins.txt
 #### we also need to do a restart for some plugins
 
 #### check all plugins installed in jenkins
-# 
+#
 # http://<jenkins-url>/script
 
 # Jenkins.instance.pluginManager.plugins.each{
-#   plugin -> 
+#   plugin ->
 #     println ("${plugin.getDisplayName()} (${plugin.getShortName()}): ${plugin.getVersion()}")
 # }
 
