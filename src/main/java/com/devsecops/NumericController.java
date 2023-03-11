@@ -38,12 +38,15 @@ public class NumericController {
 		// public String welcome() {
 		// 	return "Kubernetes DevSecOps";
 		// }
-		public ResponseEntity<String> welcome() throws IOException {
-			String htmlContent = new String(Files.readAllBytes(Paths.get("./index.html")));
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.TEXT_HTML);
-			return new ResponseEntity<>(htmlContent, headers, HttpStatus.OK);
-		}
+        public ResponseEntity<String> welcome() throws IOException {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.TEXT_HTML);
+            Path path = Paths.get("src/main/resources/static/index.html");
+            byte[] data = Files.readAllBytes(path);
+            String html = new String(data);
+            return new ResponseEntity<>(html, headers, HttpStatus.OK);
+        }
+		
 		@GetMapping("/compare/{value}")
 		public String compareToFifty(@PathVariable int value) {
 			String message = "Could not determine comparison";
