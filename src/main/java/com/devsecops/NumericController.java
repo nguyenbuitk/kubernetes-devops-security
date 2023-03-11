@@ -19,17 +19,22 @@ public class NumericController {
 
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	private static final String baseURL = "http://node-service:5000/plusone";
-	
+
 	RestTemplate restTemplate = new RestTemplate();
-	
+
 	@RestController
 	public class compare {
 
 		@GetMapping("/")
-		public String welcome() {
-			return "Kubernetes DevSecOps";
+		// public String welcome() {
+		// 	return "Kubernetes DevSecOps";
+		// }
+		public ResponseEntity<String> welcome() throws IOException {
+			String htmlContent = new String(Files.readAllBytes(Paths.get("index.jsp")));
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.TEXT_HTML);
+			return new ResponseEntity<>(htmlContent, headers, HttpStatus.OK);
 		}
-
 		@GetMapping("/compare/{value}")
 		public String compareToFifty(@PathVariable int value) {
 			String message = "Could not determine comparison";
