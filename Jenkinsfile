@@ -20,5 +20,13 @@ pipeline {
           }
         }
       }
+
+      stage ('Docker Build and Push') {
+        steps {
+          sh 'printenv'
+          sh 'docker build -t buinguyen:numeric-app:""$GIT_COMMIT"" .'
+          sh 'docker push buinguyen/numeric-app:""$GIT_COMMIT""'
+        }
+      }
     }
 }
