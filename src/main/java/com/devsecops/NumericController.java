@@ -44,7 +44,6 @@ public class NumericController {
 		// public String welcome() {
 		// 	return "Kubernetes DevSecOps";
 		// }
-
         public ResponseEntity<String> welcome() throws IOException {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_HTML);
