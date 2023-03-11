@@ -8,5 +8,11 @@ pipeline {
               archive 'target/*.jar'  // test webhook
             }
         }
+
+      stage('Unit Tests') {
+        steps {
+          sh "mvn test"
+        }
+      }
     }
 }
