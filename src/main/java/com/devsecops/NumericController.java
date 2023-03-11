@@ -55,7 +55,7 @@ public class NumericController {
 
 		public ResponseEntity<String> welcome() {
 			try {
-				Resource resource = resourceLoader.getResource("classpath:static/index.html");
+				Resource resource = resourceLoader.getResource("classpath:static/test.html");
 				InputStream inputStream = resource.getInputStream();
 				BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 				String line;
