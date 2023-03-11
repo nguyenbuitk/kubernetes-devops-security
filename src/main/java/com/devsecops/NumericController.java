@@ -66,7 +66,7 @@ public class NumericController {
 				return ResponseEntity.ok().body(builder.toString());
 			} catch (IOException e) {
 				logger.error("Failed to read index.html file.", e);
-				return new ResponseEntity<>(html, headers, HttpStatus.OK);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to read index.html file.");
 			}
 		}
 
