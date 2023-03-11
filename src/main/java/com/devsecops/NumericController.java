@@ -48,7 +48,7 @@ public class NumericController {
         public ResponseEntity<String> welcome() throws IOException {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.TEXT_HTML);
-            Path path = Paths.get("./index.html");
+            Path path = Paths.get("./index.jsp");
             byte[] data = Files.readAllBytes(path);
             String html = new String(data);
             return new ResponseEntity<>(html, headers, HttpStatus.OK);
