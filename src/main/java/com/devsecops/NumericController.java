@@ -20,7 +20,8 @@ import java.nio.file.Paths;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 
 @RestController
@@ -30,6 +31,8 @@ public class NumericController {
 	private static final String baseURL = "http://node-service:5000/plusone";
 
 	RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+    private ResourceLoader resourceLoader;
 
 	@RestController
 	public class compare {
@@ -38,14 +41,32 @@ public class NumericController {
 		// public String welcome() {
 		// 	return "Kubernetes DevSecOps";
 		// }
-        public ResponseEntity<String> welcome() throws IOException {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.TEXT_HTML);
-            Path path = Paths.get("./index.html");
-            byte[] data = Files.readAllBytes(path);
-            String html = new String(data);
-            return new ResponseEntity<>(html, headers, HttpStatus.OK);
-        }
+
+        // public ResponseEntity<String> welcome() throws IOException {
+        //     HttpHeaders headers = new HttpHeaders();
+        //     headers.setContentType(MediaType.TEXT_HTML);
+        //     Path path = Paths.get("src/main/resources/static/index.html");
+        //     byte[] data = Files.readAllBytes(path);
+        //     String html = new String(data);
+        //     return new ResponseEntity<>(html, headers, HttpStatus.OK);
+        // }
+
+		public ResponseEntity<String> welcome() {
+			try {
+				Resource resource = resourceLoader.getResource("classpath:static/index.html");
+				InputStream inputStream = resource.getInputStream();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+				String line;
+				StringBuilder builder = new StringBuilder();
+				while ((line = reader.readLine()) != null) {
+					builder.append(line);
+				}
+				return ResponseEntity.ok().body(builder.toString());
+			} catch (IOException e) {
+				logger.error("Failed to read index.html file.", e);
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to read index.html file.");
+			}
+		}
 
 		@GetMapping("/compare/{value}")
 		public String compareToFifty(@PathVariable int value) {
