@@ -45,26 +45,13 @@ pipeline {
           withSonarQubeEnv('SonarQube') {
             sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com:9000 -Dsonar.login=sqp_39ba429a25731a895a91c487b0d8e6a5bb6a75b1"
           }
-          // timeout(time: 2, unit: 'MINUTES') {
-          //   script {
-          //   waitForQualityGate abortPipeline: true
-          //   }
-          // }
-
-          maxRetry = 200
-          forloop (i=0; i<maxRetry; i++){
-              try {
-                  timeout(time: 10, unit: 'SECONDS') {
-                    script {
-                    waitForQualityGate abortPipeline: true
-                    }
-                  }
-              } catch(Exception e) {
-                  if (i == maxRetry-1) {
-                      throw e
-                  }
-              }
+          timeout(time: 2, unit: 'MINUTES') {
+            script {
+            waitForQualityGate abortPipeline: true
+            }
           }
+
+
         }
       }
 
