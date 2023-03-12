@@ -1,8 +1,6 @@
 pipeline {
   agent any
-  options {
-    retry(200)
-  }
+
   stages {
       stage('Build Artifact') {
             steps {
@@ -36,24 +34,14 @@ pipeline {
 
       stage('SonarQube - SAST') {
         steps {
-        //     withSonarQubeEnv('SonarQube') {  // lấy từ jenkins/manager/sonarqube
-        //   sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com:9000 -Dsonar.login=sqp_39ba429a25731a895a91c487b0d8e6a5bb6a75b1"
-        // }
+          // withSonarQubeEnv('SonarQube') {  // lấy từ jenkins/manager/sonarqube
+          sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com:9000 -Dsonar.login=sqp_39ba429a25731a895a91c487b0d8e6a5bb6a75b1"
+       // }
         // timeout(time: 2, unit: "MINUTES") {
         //   script {
         //     waitForQualityGate abortPipeline: true
         //   }
         // }
-          withSonarQubeEnv('SonarQube') {
-            sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com:9000 -Dsonar.login=sqp_39ba429a25731a895a91c487b0d8e6a5bb6a75b1"
-          }
-          timeout(time: 10, unit: 'SECONDS') {
-            script {
-            waitForQualityGate abortPipeline: true
-            }
-          }
-
-
         }
       }
 
