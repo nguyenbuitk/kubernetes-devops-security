@@ -34,9 +34,18 @@ pipeline {
         }
       }
 
+
+      // dependency plugin và trivy đều dùng cho scan vulnerability nên dùng parallel cho cả 2
       stage('Vulnerability Scan Docker') {
         steps {
-          sh "mvn dependency-check:check"
+          parallel(
+            "Dependency Scan" : {
+              sh "mvn dependency-check:check"
+            }
+            "Trivy Scan" : {
+              sh "bash trivy-docker-image-scan.sh"
+            }
+          )
         }
 
       }
