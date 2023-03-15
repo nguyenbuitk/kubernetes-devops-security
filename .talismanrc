@@ -2,7 +2,7 @@ fileignoreconfig:
 - filename: sec_files/file3
   checksum: b058bbb84595454d550863a6ae7fd501863acd9692ec3cc699bc6f76dd0e38a5
 - filename: Jenkinsfile
-  checksum: 7c42f3a09b4c254450014577c42d83393817383bd2b2d446c902541721415c91
+  checksum: 0cf9b3c0550c82077edd515653cfc750a0d6d8c21fb25c758ec2fe7f5f9bccbc
 - filename: payload.json
   checksum: f00f2d0f69146f78c5898818af35734471df4f431a018eace9c024d767a42392
 version: ""
