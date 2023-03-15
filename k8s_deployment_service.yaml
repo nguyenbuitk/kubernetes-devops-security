@@ -21,7 +21,7 @@ spec:
       # change the image name when running kubernetes deployment stage in jenkin
       serviceAccountName: default
       containers:
-      - image: test
+      - image: replace
         name: devsecops-container
         volumeMounts:
         - mountPath: /tmp
