@@ -5,8 +5,8 @@ echo $imageName
 docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:0.17.2 -q image --exit-code 0 --severity LOW,MEDIUM,HIGH --light $imageName
 trivy_output=$(docker run --rm -v $WORKSPACE:/root/.cache/ aquasec/trivy:0.17.2 -q image --exit-code 1 --severity CRITICAL --light $imageName)
 
-output=$(echo "$trivy_output" | grep -oP 'CRITICAL:\s*\K\d+')
-
+output=($(echo "$trivy_output" | grep -oP 'CRITICAL:\s*\K\d+'))
+echo $output
 # Initialize sum variable
 sum=0
 
@@ -22,7 +22,13 @@ echo "Total critical vulnerabilities found: $sum"
 # Output the list of critical vulnerabilities
 echo "$trivy_output"
 
-
+# Check if there are more than 3 critical vulnerabilities
+if [ "$sum" -gt 3 ]; then
+    echo "Too many critical vulnerabilities found: $sum"
+    exit 1
+else
+    echo "No more than 3 critical vulnerabilities found: $sum"
+fi
     # exit_code=$?
     # echo "Exit Code : $exit_code"
 
