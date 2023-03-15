@@ -15,11 +15,17 @@ spec:
       labels:
         app: devsecops
     spec:
+      volumes:
+      - name: vol
+        emptyDir: {}
       # change the image name when running kubernetes deployment stage in jenkin
       serviceAccountName: default
       containers:
       - image: test
         name: devsecops-container
+        volumeMounts:
+        - mountPath: /tmp
+          name: vol
         securityContext:
           runAsNonRoot: true
           runAsUser: 100
