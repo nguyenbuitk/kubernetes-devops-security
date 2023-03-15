@@ -24,7 +24,7 @@ pipeline {
       stage('SonarQube - SAST') {
         steps {
           withSonarQubeEnv('SonarQube') {  // lấy từ jenkins/manager/sonarqube
-          sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com:9000"
+          sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.host.url=http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com:9000  -Dsonar.login=sqp_b26e9b83afe448feac07ba6f881528df42180913"
           }
         // timeout(time: 2, unit: "MINUTES") {
         //   script {
