@@ -33,8 +33,7 @@ pipeline {
         // }
         }
       }
-
-
+      
       // dependency plugin và trivy đều dùng cho scan vulnerability nên dùng parallel cho cả 2
       stage('Vulnerability Scan Docker') {
         steps {
@@ -45,6 +44,8 @@ pipeline {
             "Trivy Scan" : {
               sh "bash trivy-docker-image-scan.sh"
             },
+
+            // OPA scan Dockerfile
             "OPA Conftest" : {
               sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-docker-security.rego Dockerfile'
             }
@@ -53,13 +54,20 @@ pipeline {
 
       }
 
-      stage ('Docker Build and Push') {
+      stage ('Docker Deployment') {
         steps {
           withDockerRegistry([credentialsId: "dockerhub", url: ""]) {
             sh 'printenv'
             sh 'docker build -t buinguyen/numeric-app:""$GIT_COMMIT"" .'
             sh 'docker push buinguyen/numeric-app:""$GIT_COMMIT""'
           }
+        }
+      }
+
+      stage ('Vulnerability Scan - Kubenertes') {
+        steps {
+              // OPA scan kubenertes deployment and service
+          sh 'docker run --rm -v $(pwd):/project openpolicyagent/confest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
         }
       }
 
