@@ -82,6 +82,10 @@ pipeline {
 
             "Kubesec Scan": {
               sh 'bash kubesec-scan.sh'
+            },
+
+            "Trivy scan": {
+              sh 'bash trivy-k8s-scan.sh'
             }
           )
               // OPA scan kubenertes deployment and service
