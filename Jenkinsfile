@@ -33,7 +33,7 @@ pipeline {
         // }
         }
       }
-      
+
       // dependency plugin và trivy đều dùng cho scan vulnerability nên dùng parallel cho cả 2
       stage('Vulnerability Scan Docker') {
         steps {
@@ -67,7 +67,7 @@ pipeline {
       stage ('Vulnerability Scan - Kubenertes') {
         steps {
               // OPA scan kubenertes deployment and service
-          sh 'docker run --rm -v $(pwd):/project openpolicyagent/confest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
+          sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
         }
       }
 
