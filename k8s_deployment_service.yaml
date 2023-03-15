@@ -15,8 +15,9 @@ spec:
       labels:
         app: devsecops
     spec:
+      # change the image name when running kubernetes deployment stage in jenkin
       containers:
-      - image: replace
+      - image: test
         name: devsecops-container
         securityContext:
           runAsNonRoot: true
