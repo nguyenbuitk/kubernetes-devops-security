@@ -16,12 +16,14 @@ spec:
         app: devsecops
     spec:
       # change the image name when running kubernetes deployment stage in jenkin
+      serviceAccountName: default
       containers:
       - image: test
         name: devsecops-container
         securityContext:
           runAsNonRoot: true
           runAsUser: 100
+          readOnlyRootFilesystem: true
 ---
 apiVersion: v1
 kind: Service
