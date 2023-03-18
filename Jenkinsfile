@@ -135,6 +135,14 @@ pipeline {
           }
         }
       }
+
+      stage ('OWASP ZAP') {
+        steps {
+          withKubeConfig([credentialsId: 'kubeconfig']) {
+            sh 'bash zap.sh'
+          }
+        }
+      }
   }
   post {
     always {
@@ -142,6 +150,7 @@ pipeline {
       jacoco execPattern: 'target/jacoco.exec'
       pitmutation mutationStatsFile: '**/target/pit-reports/**/mutations.xml'
       dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+      
     }
   }
 }
