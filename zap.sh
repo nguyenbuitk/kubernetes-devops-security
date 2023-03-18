@@ -4,7 +4,7 @@ PORT=$(kubectl -n default get svc ${serviceName} -o json | jq .spec.ports[].node
 
 chmod 777 $(pwd)
 echo $(id -u):$(id -g)
-docker run -v $(pwd):/zap/wrk/:rw -t owsap/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
+docker run -v $(pwd):/zap/wrk/:rw -t owasp/zap2docker-weekly zap-api-scan.py -t $applicationURL:$PORT/v3/api-docs -f openapi -r zap_report.html
 
     sudo mkdir -p owasp-zap-report
     sudo mv zap_report.html owasp-zap-report
@@ -19,4 +19,3 @@ echo "Exit code: $exit_code"
         else
             echo "OWASP ZAP did not report any Risk"
     fi;
-    
