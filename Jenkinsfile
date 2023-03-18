@@ -151,6 +151,15 @@ pipeline {
           sh 'exit 0'
         }
       }
+
+      stage('Prompte to PROD') {
+        steps {
+          timeoute(time: 2, unit: 'DAYS') {
+            input 'Do you want to Approve the Deployment to Production Environment?'
+          }
+          sh 'exit 0'
+        }
+      }
   }
   post {
     always {
