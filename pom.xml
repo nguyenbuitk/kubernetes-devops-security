@@ -47,6 +47,12 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.2.30</version>
 		</dependency>
+
+		<!-- This dependency help troubleshoot X-content-type-header -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
