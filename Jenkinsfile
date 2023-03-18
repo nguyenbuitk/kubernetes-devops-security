@@ -154,7 +154,7 @@ pipeline {
 
       stage('Prompte to PROD') {
         steps {
-          timeoute(time: 2, unit: 'DAYS') {
+          timeout(time: 1, unit: 'HOURS') {
             input 'Do you want to Approve the Deployment to Production Environment?'
           }
           sh 'exit 0'
