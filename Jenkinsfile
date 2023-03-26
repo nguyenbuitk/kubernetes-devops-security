@@ -3,6 +3,10 @@
 pipeline {
   agent any
 
+  options {
+    cache(size: 500, paths: ['~/.m2/repository'])
+  }
+
   environment {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
@@ -23,6 +27,8 @@ pipeline {
       stage('Unit Tests - JUnit and Jacoco') {
         steps {
           sh "mvn test"
+          sh "mvn jacoco:report"
+          archive 'target/site/jacoco/index.html'
         }
       }
 
@@ -170,6 +176,8 @@ pipeline {
       publishHTML([allowMissing: false, alwaysLinkToLastBuild: true, keepAll: true, reportDir: 'owasp-zap-report', reportFiles: 'zap_report.html', reportName: 'OWASP ZAP HTML REPORT', reportTitles: 'OWASP ZAP HTML REPORT', useWrapperFileDirectly: true])
 
       sendNotification currentBuild.result
+
+
     }
   }
 }
