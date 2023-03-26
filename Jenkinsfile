@@ -3,9 +3,7 @@
 pipeline {
   agent any
 
-  options {
-    cache(size: 500, paths: ['~/.m2/repository'])
-  }
+
 
   environment {
     deploymentName = "devsecops"
@@ -14,6 +12,10 @@ pipeline {
     imageName = "buinguyen/numeric-app:${GIT_COMMIT}"
     applicationURL = "http://dev-ovng-poc2-lead.ovng.dev.myovcloud.com"
     applicationURI = "/increment/99"
+  }
+
+  options {
+    cache(size: 500, paths: ['./repository'])
   }
 
   stages {
@@ -27,6 +29,8 @@ pipeline {
       stage('Unit Tests - JUnit and Jacoco') {
         steps {
           sh "mvn test"
+
+          // generate code coverage and achirve
           sh "mvn jacoco:report"
           archive 'target/site/jacoco/index.html'
         }
