@@ -14,9 +14,6 @@ pipeline {
     applicationURI = "/increment/99"
   }
 
-  options {
-    cache(size: 500, paths: ['./repository'])
-  }
 
   stages {
       stage('Build Artifact') {
