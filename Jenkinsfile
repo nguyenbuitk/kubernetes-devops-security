@@ -3,8 +3,6 @@
 pipeline {
   agent any
 
-
-
   environment {
     deploymentName = "devsecops"
     containerName = "devsecops-container"
