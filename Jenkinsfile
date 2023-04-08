@@ -159,14 +159,14 @@ pipeline {
         }
       }
 
-      stage('Prompte to PROD') {
-        steps {
-          timeout(time: 1, unit: 'HOURS') {
-            input 'Do you want to Approve the Deployment to Production Environment?'
-          }
-          sh 'exit 0'
-        }
-      }
+      // stage('Prompte to PROD') {
+      //   steps {
+      //     timeout(time: 1, unit: 'HOURS') {
+      //       input 'Do you want to Approve the Deployment to Production Environment?'
+      //     }
+      //     sh 'exit 0'
+      //   }
+      // }
   }
   post {
     always {
