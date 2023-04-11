@@ -17,7 +17,7 @@ then
             echo "Increment Test Failed"
             exit 1;
     fi;
-
+    echo "http_code: $http_code"
     if [[ "$http_code" == 200 ]];
         then
             echo "HTTP Status Code Test Passed"
