@@ -6,7 +6,7 @@
 # adoptopenjdk/openjdk8:alpine-slim 0
 
 dockerImageName=$(awk 'NR==1 {print $2}' Dockerfile)
-echo $dockerImageName
+echo "docker image will scannaed: " $dockerImageName
 whoami
 pwd
 
