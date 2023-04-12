@@ -6,8 +6,8 @@ echo "serviceName: ${serviceName}"
 echo "applicationURL: ${applicationURL}"
 echo "applicationURI: ${applicationURI}"
 
-echo $PORT
-echo $applicationURL:$PORT$applicationURI
+echo "PORT: $PORT"
+echo "URL: $applicationURL:$PORT$applicationURI"
 
 if [[ ! -z "$PORT" ]];
 then

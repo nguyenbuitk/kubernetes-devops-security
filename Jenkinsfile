@@ -99,15 +99,6 @@ pipeline {
         }
       }
 
-      // stage ('Kubernetes Deployment - DEV') {
-      //   steps {
-      //     withKubeConfig([credentialsId: 'kubeconfig']) {
-      //       sh "sed -i 's#replace#buinguyen/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
-      //       sh "kubectl apply -f k8s_deployment_service.yaml"
-      //     }
-      //   }
-      // }
-
       stage ('Kubernetes Deployment - DEV') {
         steps {
           parallel (
